@@ -1,8 +1,9 @@
 <Solution>
   <Configurations>
+    <Platform Name="Any CPU" />
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="../CrowAdapter.Moonlighter/CrowAdapter.Moonlighter.vcxproj" />
-  <Project Path="CrowAdapters.vcxproj" />
+  <Project Path="../CrowAdapter.Moonlighter/CrowAdapter.Moonlighter.csproj" Id="e10fe2d0-d88c-4a32-ad9d-160f05ce1bd1" />
+  <Project Path="CrowAdapters.vcxproj" Id="845378e2-1c30-4c0f-89ea-5508af49e187" />
 </Solution>
