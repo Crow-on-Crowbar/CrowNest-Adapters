@@ -38,6 +38,15 @@ namespace CrowAdapter.Moonlighter
                 HeroMerchant.Instance.heroMerchantStats.Die();
                 Logger.LogInfo("[CrowNest] Health set to 9999.");
             }
+
+            if (Input.GetKeyDown(KeyCode.F3))
+            {
+                if (HeroMerchant.Instance == null) return;
+                int level = CrowReflector.GetField<int>(HeroMerchant.Instance, "_currentDungeonLevel");
+                Logger.LogInfo($"[CrowNest] Current dungeon level: {level}");
+                CrowReflector.SetField<int>(HeroMerchant.Instance, "_currentDungeonLevel", 5);
+                Logger.LogInfo("[CrowNest] Dungeon level set to 5.");
+            }
         }
     }
 }
