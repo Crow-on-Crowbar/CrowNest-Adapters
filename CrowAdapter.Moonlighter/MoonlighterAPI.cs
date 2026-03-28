@@ -1,33 +1,21 @@
 using System;
+using UnityEngine;
 
-public static class MoonlighterAPI
+namespace CrowAdapter.Moonlighter
 {
-    // 어댑터에서 구독할 이벤트들
-    public static event Action OnPlayerDied;
-    public static event Action<float> OnPlayerDamaged;
-    public static event Action<int> OnFloorChanged;
-
-    public static void Initialize()
+    public static class MoonlighterAPI
     {
-        // 1. 플레이어 사망 이벤트 구독
-        HeroMerchant.OnDie += () =>
-        {
-            OnPlayerDied?.Invoke();
-        };
+        public static event Action OnPlayerDied;
+        public static event Action<float> OnPlayerDamaged;
+        public static event Action<int> OnFloorChanged;
 
-        // 2. 데미지 입었을 때 (dmg: 데미지 양, enemy: 가해자 객체)
-        HeroMerchant.OnDealedDamage += (dmg, enemy) =>
+        public static void Initialize()
         {
-            OnPlayerDamaged?.Invoke(dmg);
-        };
+            HeroMerchant.OnDie += () => OnPlayerDied?.Invoke();
+            HeroMerchant.OnDealedDamage += (dmg, enemy) => OnPlayerDamaged?.Invoke(dmg);
+            HeroMerchant.OnFloorChange += (culture, floor) => OnFloorChanged?.Invoke(floor);
 
-        // 3. 층 변경 시 (culture: 문화권/테마, floor: 층 번호)
-        HeroMerchant.OnFloorChange += (culture, floor) =>
-        {
-            OnFloorChanged?.Invoke(floor);
-        };
-
-        // 로깅 (선택 사항)
-         Console.WriteLine("[CrowNest] MoonlighterAPI Events Subscribed.");
+            Debug.Log("[CrowNest] MoonlighterAPI initialized.");
+        }
     }
 }
