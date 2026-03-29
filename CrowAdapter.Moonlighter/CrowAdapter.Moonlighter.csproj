@@ -263,6 +263,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy "$(TargetPath)" "C:\Program Files (x86)\Steam\steamapps\common\Moonlighter\BepInEx\plugins"</PostBuildEvent>
+    <PostBuildEvent>copy "$(TargetPath)" "E:\SteamLibrary\steamapps\common\Moonlighter\BepInEx\plugins"</PostBuildEvent>
   </PropertyGroup>
 </Project>

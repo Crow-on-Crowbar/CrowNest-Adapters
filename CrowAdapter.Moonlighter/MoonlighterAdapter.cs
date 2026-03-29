@@ -8,9 +8,8 @@ namespace CrowAdapter.Moonlighter
     {
         private void Awake()
         {
-            Logger.LogInfo("[CrowNest] Awake called!");
+            CrowMod.Logger = Logger;
             CrowModLoader.Register(new ExampleMod());
-            Logger.LogInfo("[CrowNest] Register called!");
         }
 
         private void Update()
