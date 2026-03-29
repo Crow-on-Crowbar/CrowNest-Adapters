@@ -253,12 +253,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CrowMod.cs" />
-    <Compile Include="CrowModLoader.cs" />
-    <Compile Include="CrowReflector.cs" />
-    <Compile Include="ExampleMod.cs" />
+    <Compile Include="Core\CrowMod.cs" />
+    <Compile Include="Core\CrowModLoader.cs" />
+    <Compile Include="Core\CrowReflector.cs" />
+    <Compile Include="Example\ExampleMod.cs" />
     <Compile Include="MoonlighterAdapter.cs" />
-    <Compile Include="MoonlighterAPI.cs" />
+    <Compile Include="API\MoonlighterAPI.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

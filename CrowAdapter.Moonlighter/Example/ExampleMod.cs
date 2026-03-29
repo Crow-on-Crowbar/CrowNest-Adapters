@@ -1,3 +1,4 @@
+using CrowAdapter.Moonlighter;
 using UnityEngine;
 
 public class ExampleMod : CrowMod
@@ -8,6 +9,10 @@ public class ExampleMod : CrowMod
     public override void OnLoad()
     {
         Logger?.LogInfo("[CrowNest] Example Mod loaded!");
+        MoonlighterAPI.OnPlayerDamaged += (dmg) =>
+            Logger?.LogInfo($"[CrowNest] Player took {dmg} damage!");
+        MoonlighterAPI.OnFloorChanged += (floor) =>
+            Logger?.LogInfo($"[CrowNest] Entered floor {floor}!");
     }
 
     public override void OnUnload()

@@ -9,9 +9,16 @@ namespace CrowAdapter.Moonlighter
         private void Awake()
         {
             CrowMod.Logger = Logger;
+            MoonlighterAPI.Initialize();
             CrowModLoader.Register(new ExampleMod());
-        }
 
+            MoonlighterAPI.OnDayTimeChanged += (time) =>
+                Logger.LogInfo($"[CrowNest] Day time: {time}");
+            MoonlighterAPI.OnShopOpened += () =>
+                Logger.LogInfo("[CrowNest] Shop opened!");
+            MoonlighterAPI.OnRoomEntered += (room) =>
+                Logger.LogInfo($"[CrowNest] Entered room: {room.name}");
+        }
         private void Update()
         {
             CrowModLoader.UpdateAll();
