@@ -256,7 +256,7 @@
     <Compile Include="Core\CrowMod.cs" />
     <Compile Include="Core\CrowModLoader.cs" />
     <Compile Include="Core\CrowReflector.cs" />
-    <Compile Include="Example\ExampleMod.cs" />
+    <Compile Include="Example\HardcoreMod.cs" />
     <Compile Include="MoonlighterAdapter.cs" />
     <Compile Include="API\MoonlighterAPI.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
