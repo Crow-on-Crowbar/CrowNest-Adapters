@@ -255,6 +255,7 @@
   <ItemGroup>
     <Compile Include="Core\CrowMod.cs" />
     <Compile Include="Core\CrowModLoader.cs" />
+    <Compile Include="Core\CrowPipeClient.cs" />
     <Compile Include="Core\CrowReflector.cs" />
     <Compile Include="Example\HardcoreMod.cs" />
     <Compile Include="MoonlighterAdapter.cs" />
