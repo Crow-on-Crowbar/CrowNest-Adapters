@@ -1,52 +1,53 @@
 ﻿using BepInEx;
-using CrowAdapter.Moonlighter.Core;
-using System;
+using CrowNest.SDK;
+using CrowNest.SDK.Unity;
+using System.Collections;
 using UnityEngine;
 
 namespace CrowAdapter.Moonlighter
 {
     [BepInPlugin("com.crownest.moonlighter", "CrowAdapter.Moonlighter", "1.0.0")]
-    public class MoonlighterAdapter : BaseUnityPlugin
+    public class MoonlighterAdapter : UnityAdapterBase
     {
-        void Awake()
+        protected override IEnumerator WaitForSceneLoad()
         {
-            // 1. Initialize the Pipe Client first
-            CrowPipeClient.Initialize();
-            CrowPipeClient.Send(0x01, "[SYSTEM] CrowPipe Client Initialized.");
+            while (ShopManager.Instance == null)
+                yield return null;
+        }
 
-            // 2. Initialize Moonlighter Internal API
+        protected override void InitializeAPI()
+        {
             MoonlighterAPI.Initialize();
-            CrowPipeClient.Send(0x01, "[SYSTEM] MoonlighterAPI Hooking Complete.");
 
-            // 3. Bind API Events to Pipe Signals (Lambda expressions)
-            BindEventsToPipe();
-        }
-
-        void Update()
-        {
-            if (!CrowPipeClient.IsConnected)
+            CrowPipeClient.OnPacketReceived += (type, data) =>
             {
-                CrowPipeClient.Initialize();
-            }
+                if (type == 0x10)
+                {
+                    if (int.TryParse(data, out int amount))
+                    {
+                        Logger.LogInfo($"[CrowNest] SET_GOLD: {amount}");
+                        HeroMerchant.Instance?.addGold(
+                            -HeroMerchant.Instance.GetCurrentGold() + amount
+                        );
+                    }
+                }
+            };
         }
 
-        private void BindEventsToPipe()
+        protected override void BindEvents()
         {
-            // Player Events
             MoonlighterAPI.OnPlayerDamaged += (dmg) =>
                 CrowPipeClient.Send(0x02, $"[EVENT] Player Damaged: {dmg}");
 
             MoonlighterAPI.OnPlayerDied += () =>
                 CrowPipeClient.Send(0x02, "[EVENT] Player Died.");
 
-            // Shop Events
             MoonlighterAPI.OnShopOpened += () =>
                 CrowPipeClient.Send(0x02, "[EVENT] Shop Opened.");
 
             MoonlighterAPI.OnShopClosed += () =>
                 CrowPipeClient.Send(0x02, "[EVENT] Shop Closed.");
 
-            // Dungeon/World Events
             MoonlighterAPI.OnRoomEntered += (room) =>
                 CrowPipeClient.Send(0x02, $"[EVENT] Entered Room: {room.name}");
 

@@ -28,27 +28,26 @@ namespace CrowAdapter.Moonlighter
 
         public static void Initialize()
         {
-            // Player
             HeroMerchant.OnDie += () => OnPlayerDied?.Invoke();
             HeroMerchant.OnDealedDamage += (dmg, enemy) => OnPlayerDamaged?.Invoke(dmg);
             HeroMerchant.OnFloorChange += (culture, floor) => OnFloorChanged?.Invoke(floor);
-
-            // Shop
             ShopManager.OnShopOpen += () => OnShopOpened?.Invoke();
             ShopManager.OnShopClose += () => OnShopClosed?.Invoke();
             ShopManager.OnWillWakeAnimationEnded += () => OnWillWokeUp?.Invoke();
-
-            // Dungeon
             DungeonManager.OnHeroChangingRoom += (from, to) => OnRoomChanged?.Invoke(from, to);
             DungeonManager.OnEnterRoom += (room) => OnRoomEntered?.Invoke(room);
             DungeonManager.OnExitRoom += (room) => OnRoomExited?.Invoke(room);
-
-            // World
             GameManager.OnTownLoadStarted += () => OnTownLoadStarted?.Invoke();
             GameManager.OnGamePaused += (paused) => OnGamePaused?.Invoke(paused);
-            GameManager.Instance.OnTownLoaded += () => OnTownLoaded?.Invoke();
-            GameManager.Instance.OnDungeonLoaded += (tutorial) => OnDungeonLoaded?.Invoke(tutorial);
-            TimeManagerV2.Instance.OnDayTimeChange += (time) => OnDayTimeChanged?.Invoke(time);
+
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.OnTownLoaded += () => OnTownLoaded?.Invoke();
+                GameManager.Instance.OnDungeonLoaded += (tutorial) => OnDungeonLoaded?.Invoke(tutorial);
+            }
+
+            if (TimeManagerV2.Instance != null)
+                TimeManagerV2.Instance.OnDayTimeChange += (time) => OnDayTimeChanged?.Invoke(time);
         }
     }
 }

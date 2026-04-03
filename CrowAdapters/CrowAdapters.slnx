@@ -5,5 +5,7 @@
     <Platform Name="x86" />
   </Configurations>
   <Project Path="../CrowAdapter.Moonlighter/CrowAdapter.Moonlighter.csproj" Id="e10fe2d0-d88c-4a32-ad9d-160f05ce1bd1" />
+  <Project Path="../CrowNest.SDK.Unity/CrowNest.SDK.Unity.csproj" Id="4153613c-5d47-42fd-8a8f-6b0799942648" />
+  <Project Path="../CrowNest.SDK/CrowNest.SDK.csproj" Id="42197d81-1dc8-4a61-9db1-8d18091bf571" />
   <Project Path="CrowAdapters.vcxproj" Id="845378e2-1c30-4c0f-89ea-5508af49e187" />
 </Solution>
